@@ -60,7 +60,7 @@ public class FragmentPhoto extends Fragment {
         recycleView.setLayoutManager(layoutManager);
         recycleView.setAdapter(photoAdapter);
         recycleView.addItemDecoration(new MyDecoration(getActivity(),MyDecoration.VERTICAL_LIST));
-        swipeRefresh=(SwipeRefreshLayout)view.findViewById(R.id.swip_refresh);
+        swipeRefresh=(SwipeRefreshLayout)view.findViewById(R.id.swip_refresh_photo);
         Log.d("aaaaaaa", "onCreateView: ");
 //        photoAdapter=new PhotoAdapter(photoGroupList,getContext());
 //        LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
@@ -115,6 +115,7 @@ public class FragmentPhoto extends Fragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseText = response.body().string();
+                Log.d("hhhhhhhhh", "run: "+responseText);
                 final PhotoDate photoDate = Utility.handlePhotoDate(responseText);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override

@@ -3,6 +3,7 @@ package com.example.bottomnavigate.util;
 import android.util.Log;
 
 import com.example.bottomnavigate.photogson.PhotoDate;
+import com.example.bottomnavigate.talkgson.TalkDate;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -26,6 +27,14 @@ public class Utility {
             //  String  photoContent=jsonArray.getJSONObject(0).toString();
             //  String photoDateContent = jsonArray.getJSONObject(0).toString();
             return new Gson().fromJson(response, PhotoDate.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static TalkDate handleTalkDate(String response) {
+        try {
+            return new Gson().fromJson(response, TalkDate.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

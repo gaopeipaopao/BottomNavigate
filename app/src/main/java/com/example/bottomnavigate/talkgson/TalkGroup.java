@@ -1,22 +1,27 @@
-package com.example.bottomnavigate.photogson;
+package com.example.bottomnavigate.talkgson;
 
+import com.example.bottomnavigate.photogson.PhotoGroup;
+import com.example.bottomnavigate.photogson.PhotoTitle;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 /**
- * Created by 泡泡 on 2017/12/2.
+ * Created by 泡泡 on 2017/12/9.
  */
 
-public class PhotoGroup {
+public class TalkGroup {
 
     @SerializedName("group")
     public Group group;
 
     public class Group {
+
+        public String text;
+
         public User user;
 
-        public class User{
+        public class User {
             public String name;
 
             @SerializedName("avatar_url")
@@ -24,13 +29,8 @@ public class PhotoGroup {
 
         }
 
-        public String text;
-
         @SerializedName("dislike_reason")
-        public List<PhotoTitle> photoTitles;
-
-        @SerializedName("large_image")
-        public PhotoImage photoImage;
+        public List<TalkTitle> talkTitles;
 
         @SerializedName("digg_count")
         public String digg;
@@ -41,5 +41,4 @@ public class PhotoGroup {
         @SerializedName("comment_count")
         public String  comment;
     }
-
 }
