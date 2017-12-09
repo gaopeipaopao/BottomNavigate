@@ -1,4 +1,4 @@
-package com.example.bottomnavigate;
+package com.example.bottomnavigate.Adpatre;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 泡泡 on 2017/11/28.
+ * Created by 泡泡 on 2017/12/2.
  */
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {

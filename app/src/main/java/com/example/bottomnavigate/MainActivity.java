@@ -1,12 +1,18 @@
 package com.example.bottomnavigate;
 
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
+import com.example.bottomnavigate.Adpatre.ViewPagerAdapter;
+
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
     List<Fragment> mfragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

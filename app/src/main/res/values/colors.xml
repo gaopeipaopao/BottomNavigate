@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlavk">#000</color>
+    <color name="colorPink">#FF80AA</color>
+    <color name="colorGray">#EDEDED</color>
 </resources>
