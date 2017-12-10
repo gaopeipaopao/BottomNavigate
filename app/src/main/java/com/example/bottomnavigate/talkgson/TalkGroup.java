@@ -40,5 +40,8 @@ public class TalkGroup {
 
         @SerializedName("comment_count")
         public String  comment;
+
+        @SerializedName("category_name")
+        public  String  category;
     }
 }

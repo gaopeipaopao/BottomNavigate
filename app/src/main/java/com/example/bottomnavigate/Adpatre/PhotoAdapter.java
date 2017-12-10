@@ -144,7 +144,8 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
         holder.comment_count.setText(photoGroup.group.comment);
         Glide.with(context).load(photoGroup.group.user.userPicture).into(holder.headerPicture);
         holder.headerName.setText(photoGroup.group.user.name);
-        holder.textContent.setText(photoGroup.group.text);
+        String content="#"+photoGroup.group.category+'#'+' '+photoGroup.group.text;
+        holder.textContent.setText(content);
         holder.digg_photo.setBackgroundResource(R.drawable.dingding);
         holder.bury_photo.setBackgroundResource(R.drawable.buzan);
         //imageview自适应

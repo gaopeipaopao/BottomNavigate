@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.bottomnavigate.photogson.PhotoDate;
 import com.example.bottomnavigate.talkgson.TalkDate;
+import com.example.bottomnavigate.vidgson.VidDate;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -35,6 +36,15 @@ public class Utility {
     public static TalkDate handleTalkDate(String response) {
         try {
             return new Gson().fromJson(response, TalkDate.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static VidDate handleVidDate(String response) {
+        try {
+            Log.d("nnnnnnnnnnnnn", "handleVidDate: "+response);
+            return new Gson().fromJson(response, VidDate.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
