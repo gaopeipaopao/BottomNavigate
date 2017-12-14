@@ -4,8 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +52,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
     WindowManager wm;
     private int height = 0;
     private int width = 0;
+    private SpannableString spannableString;
 
     public PhotoAdapter(List<PhotoGroup> photoGroupList, Context context) {
         this.context = context;
@@ -145,7 +151,19 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
         Glide.with(context).load(photoGroup.group.user.userPicture).into(holder.headerPicture);
         holder.headerName.setText(photoGroup.group.user.name);
         String content="#"+photoGroup.group.category+'#'+' '+photoGroup.group.text;
-        holder.textContent.setText(content);
+      //  holder.textContent.setText(content);
+        int start=0;
+        int end = 0;
+        for(int i=1;i<content.length();i++){
+            if(content.charAt(i)=='#'){
+                end=i+1;
+                break;
+            }
+        }
+        Log.d("nananannna", "onBindViewHolder: "+start+end);
+        spannableString=new SpannableString(content);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FF80AA")),start,end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        holder.textContent.setText(spannableString);
         holder.digg_photo.setBackgroundResource(R.drawable.dingding);
         holder.bury_photo.setBackgroundResource(R.drawable.buzan);
         //imageview自适应

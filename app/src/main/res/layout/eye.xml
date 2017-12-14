@@ -12,5 +12,5 @@
 
     <!--</android.support.v7.widget.RecyclerView>-->
 
-    <include layout="@layout/recyclerview_adapter"/>
+    <include layout="@layout/eye_adapter"/>
 </LinearLayout>

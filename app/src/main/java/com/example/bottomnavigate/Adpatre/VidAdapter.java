@@ -2,12 +2,17 @@ package com.example.bottomnavigate.Adpatre;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -43,7 +48,8 @@ public class VidAdapter extends RecyclerView.Adapter<VidAdapter.ViewHolder> {
     private List<VidGroup> vidGroupList;
     private Context context;
     private GestureDetector mGesture;
-    FrameLayout.LayoutParams para;
+    private FrameLayout.LayoutParams para;
+    private SpannableString spannableString;
 
     public VidAdapter(List<VidGroup> vidGroupList, Context context) {
         this.context = context;
@@ -154,7 +160,19 @@ public class VidAdapter extends RecyclerView.Adapter<VidAdapter.ViewHolder> {
         holder.comment_count_vid.setText(vidGroup.group.comment);
         holder.headerNamevid.setText(vidGroup.group.user.name);
         String content="#"+vidGroup.group.category+'#'+' '+vidGroup.group.text;
-        holder.Contentvid.setText(content);
+        //holder.Contentvid.setText(content);
+        int start=0;
+        int end = 0;
+        for(int i=1;i<content.length();i++){
+            if(content.charAt(i)=='#'){
+                end=i+1;
+                break;
+            }
+        }
+        Log.d("nananannna", "onBindViewHolder: "+start+end);
+        spannableString=new SpannableString(content);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FF80AA")),start,end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        holder.Contentvid.setText(spannableString);
         holder.digg_vid.setBackgroundResource(R.drawable.dingding);
         holder.bury_vid.setBackgroundResource(R.drawable.buzan);
         Glide.with(context).load(vidGroup.group.user.userPicture).into(holder.headerPicturevid);

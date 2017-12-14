@@ -1,18 +1,13 @@
 package com.example.bottomnavigate;
 
-import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.MediaController;
-import android.widget.VideoView;
 
 import com.example.bottomnavigate.Adpatre.ViewPagerAdapter;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         mfragment=new ArrayList<>();
        // Log.d("aaaaaaa", "onCreate: ");
-        mfragment.add(new FragmentRecommend());
+        mfragment.add(new Eye());
        // Log.d("bbbbbbbb", "onCreate: ");
         mfragment.add(new Fragmentvid());
         mfragment.add(new FragmentPhoto());

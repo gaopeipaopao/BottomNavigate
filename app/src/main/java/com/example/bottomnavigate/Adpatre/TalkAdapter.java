@@ -1,7 +1,14 @@
 package com.example.bottomnavigate.Adpatre;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +34,7 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.ViewHolder> {
 
     private List<TalkGroup> talkGroupList;
     private Context context;
+    private SpannableString spannableString;
 
     public TalkAdapter(List<TalkGroup> talkGroupList, Context context) {
         this.context = context;
@@ -43,21 +51,21 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.ViewHolder> {
         TextView digg_count_talk;
         Button bury_talk;
         TextView bury_count_talk;
-        Button  comment_talk;
+        Button comment_talk;
         TextView comment_count_talk;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            talkView=itemView;
+            talkView = itemView;
             headerPicturetalk = (ImageView) itemView.findViewById(R.id.talk_header_picture);
             headerNametalk = (TextView) itemView.findViewById(R.id.talk_header_name);
             Contenttalk = (TextView) itemView.findViewById(R.id.talk_content);
-            digg_talk=(Button)itemView.findViewById(R.id.digg_talk);
-            digg_count_talk=(TextView)itemView.findViewById(R.id.digg_count_talk);
-            bury_talk=(Button) itemView.findViewById(R.id.bury_talk);
-            bury_count_talk=(TextView)itemView.findViewById(R.id.bury_count_talk);
-            comment_talk=(Button)itemView.findViewById(R.id.comment_talk);
-            comment_count_talk=(TextView)itemView.findViewById(R.id.comment_count_talk);
+            digg_talk = (Button) itemView.findViewById(R.id.digg_talk);
+            digg_count_talk = (TextView) itemView.findViewById(R.id.digg_count_talk);
+            bury_talk = (Button) itemView.findViewById(R.id.bury_talk);
+            bury_count_talk = (TextView) itemView.findViewById(R.id.bury_count_talk);
+            comment_talk = (Button) itemView.findViewById(R.id.comment_talk);
+            comment_count_talk = (TextView) itemView.findViewById(R.id.comment_count_talk);
 
         }
     }
@@ -73,8 +81,8 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.ViewHolder> {
                 int position = holder.getAdapterPosition();
                 TalkGroup talkGroup = talkGroupList.get(position);
                 int digg = Integer.parseInt(talkGroup.group.digg);
-                digg=digg+1;
-                String diggs=String.valueOf(digg);
+                digg = digg + 1;
+                String diggs = String.valueOf(digg);
                 holder.digg_talk.setBackgroundResource(R.drawable.dianzan_yellow);
                 holder.digg_count_talk.setText(diggs);
                 holder.bury_talk.setBackgroundResource(R.drawable.buzan);
@@ -86,8 +94,8 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.ViewHolder> {
                 int position = holder.getAdapterPosition();
                 TalkGroup talkGroup = talkGroupList.get(position);
                 int digg = Integer.parseInt(talkGroup.group.bury);
-                digg=digg+1;
-                String diggs=String.valueOf(digg);
+                digg = digg + 1;
+                String diggs = String.valueOf(digg);
                 holder.bury_talk.setBackgroundResource(R.drawable.buzan_yellow);
                 holder.bury_count_talk.setText(diggs);
                 holder.digg_talk.setBackgroundResource(R.drawable.dingding);
@@ -96,7 +104,13 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.ViewHolder> {
         holder.comment_talk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"hhh",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "hhh", Toast.LENGTH_SHORT).show();
+            }
+        });
+        holder.talkView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
             }
         });
         return holder;
@@ -109,19 +123,32 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.ViewHolder> {
         holder.bury_count_talk.setText(talkGroup.group.bury);
         holder.comment_count_talk.setText(talkGroup.group.comment);
         holder.headerNametalk.setText(talkGroup.group.user.name);
-        List<TalkTitle> talkTitles=talkGroup.group.talkTitles;
+        List<TalkTitle> talkTitles = talkGroup.group.talkTitles;
         String content = null;
-        for(TalkTitle talkTitle:talkTitles){
-            if(talkTitle.title.charAt(0)=='吧'){
-                content="#"+talkTitle.title.charAt(2);
-                for(int i=3;i<talkTitle.title.length();i++){
-                    content=content+talkTitle.title.charAt(i);
+        for (TalkTitle talkTitle : talkTitles) {
+            if (talkTitle.title.charAt(0) == '吧') {
+                content = "#" + talkTitle.title.charAt(2);
+                for (int i = 3; i < talkTitle.title.length(); i++) {
+                    content = content + talkTitle.title.charAt(i);
                 }
-                content=content+'#'+' ';
+                content = content + '#' + ' ';
                 break;
             }
         }
-        holder.Contenttalk.setText(content+talkGroup.group.text);
+        // holder.Contenttalk.setText(content+talkGroup.group.text);
+        String contents = content + talkGroup.group.text;
+        int start = 0;
+        int end = 0;
+        for (int i = 1; i < contents.length(); i++) {
+            if (contents.charAt(i) == '#') {
+                end = i + 1;
+                break;
+            }
+        }
+        Log.d("nananannna", "onBindViewHolder: " + start + end);
+        spannableString = new SpannableString(contents);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FF80AA")), start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        holder.Contenttalk.setText(spannableString);
         holder.digg_talk.setBackgroundResource(R.drawable.dingding);
         holder.bury_talk.setBackgroundResource(R.drawable.buzan);
         Glide.with(context).load(talkGroup.group.user.userPicture).into(holder.headerPicturetalk);
@@ -138,3 +165,4 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.ViewHolder> {
         notifyItemInserted(position);
     }
 }
+
